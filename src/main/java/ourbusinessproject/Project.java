@@ -2,6 +2,7 @@ package ourbusinessproject;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "projects")
@@ -17,11 +18,25 @@ public class Project {
     @Column(name = "description")
     private String description;
 
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "enterprise", nullable = false)
+    private Enterprise enterprise;
+
     Project() {}
 
-    Project(String title, String description) {
+    Project(String title, String description, Enterprise enterprise) {
         this.title = title;
         this.description = description;
+        this.enterprise = enterprise;
+    }
+
+    public Enterprise getEnterprise() {
+        return enterprise;
+    }
+
+    public void setEnterprise(Enterprise enterprise) {
+        this.enterprise = enterprise;
     }
 
     public void setTitle(String title) {

@@ -21,8 +21,8 @@ public class EnterpriseProjectService {
         return entityManager;
     }
 
-    public Project newProject(String title, String description) {
-        Project project = new Project(title, description);
+    public Project newProject(String title, String description, Enterprise enterprise) {
+        Project project = new Project(title, description, enterprise);
 
         this.entityManager.persist(project);
         this.entityManager.flush();
