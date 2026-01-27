@@ -17,8 +17,11 @@ public class Project {
     @Column(name = "description")
     private String description;
 
-    Project() {
+    Project() {}
 
+    Project(String title, String description) {
+        this.title = title;
+        this.description = description;
     }
 
     public void setTitle(String title) {
@@ -27,5 +30,9 @@ public class Project {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Long getId() {
+        return id;
     }
 }

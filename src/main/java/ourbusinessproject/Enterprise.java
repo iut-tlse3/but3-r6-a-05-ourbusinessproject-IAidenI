@@ -29,8 +29,13 @@ public class Enterprise {
     @Column(name = "contact_email", nullable = false)
     private String contactEmail;
 
-    Enterprise() {
+    Enterprise() {}
 
+    Enterprise(String name, String description, String contactName, String contactEmail) {
+        this.name = name;
+        this.description = description;
+        this.contactName = contactName;
+        this.contactEmail = contactEmail;
     }
 
     public void setName(String name) {
@@ -47,5 +52,9 @@ public class Enterprise {
 
     public void setContactName(String contactName) {
         this.contactName = contactName;
+    }
+
+    public Long getId() {
+        return id;
     }
 }
