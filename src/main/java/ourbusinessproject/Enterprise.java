@@ -9,6 +9,7 @@ import jakarta.validation.constraints.Size;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 
 @Entity
@@ -41,7 +42,6 @@ public class Enterprise {
         this.description = description;
         this.contactName = contactName;
         this.contactEmail = contactEmail;
-        this.projects = new ArrayList<>();
     }
 
     public void setName(String name) {
@@ -66,5 +66,10 @@ public class Enterprise {
 
     public Long getId() {
         return id;
+    }
+
+    public void addProject(Project project) {
+        if (this.projects == null) this.projects = new HashSet<>();
+        this.projects.add(project);
     }
 }

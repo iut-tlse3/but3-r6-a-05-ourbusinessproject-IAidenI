@@ -6,6 +6,8 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class EnterpriseProjectService {
@@ -24,12 +26,9 @@ public class EnterpriseProjectService {
     public Project newProject(String title, String description, Enterprise enterprise) {
         Project project = new Project(title, description, enterprise);
 
-        if (enterprise != null) {
-            enterprise.getProjects().add(project);
-        }
-
         this.entityManager.persist(project);
         this.entityManager.flush();
+        enterprise.addProject(project);
 
         return project;
     }
@@ -49,5 +48,10 @@ public class EnterpriseProjectService {
 
     public Enterprise findEnterpriseById(Long id) {
         return this.entityManager.find(Enterprise.class, id);
+    }
+
+    public List<Project> findAllProjects() {
+        String query = "SELECT p FROM Project p ORDER BY p.title";
+        return this.entityManager.createQuery(query, Project.class).getResultList();
     }
 }
