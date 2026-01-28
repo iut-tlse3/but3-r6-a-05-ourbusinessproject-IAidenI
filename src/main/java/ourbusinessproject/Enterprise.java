@@ -72,4 +72,8 @@ public class Enterprise {
         if (this.projects == null) this.projects = new HashSet<>();
         this.projects.add(project);
     }
+
+    public String getName() {
+        return this.name;
+    }
 }
