@@ -12,15 +12,12 @@ public class Project {
     private Long id;
 
     @NotEmpty
-    @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(name = "description")
     private String description;
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "enterprise", nullable = false)
     private Enterprise enterprise;
 
     Project() {}

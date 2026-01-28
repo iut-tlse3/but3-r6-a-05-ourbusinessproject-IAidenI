@@ -3,7 +3,13 @@ package ourbusinessproject;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "enterprises")
@@ -13,21 +19,20 @@ public class Enterprise {
     private Long id;
 
     @NotEmpty
-    @Column(name = "name", nullable = false)
     private String name;
 
     @Size(min=10)
-    @Column(name = "description")
     private String description;
 
     @NotEmpty
-    @Column(name = "contact_name", nullable = false)
     private String contactName;
 
     @NotEmpty
     @Email
-    @Column(name = "contact_email", nullable = false)
     private String contactEmail;
+
+    @OneToMany(mappedBy = "enterprise")
+    private Collection<Project> projects;
 
     Enterprise() {}
 
@@ -36,6 +41,7 @@ public class Enterprise {
         this.description = description;
         this.contactName = contactName;
         this.contactEmail = contactEmail;
+        this.projects = new ArrayList<>();
     }
 
     public void setName(String name) {
@@ -52,6 +58,10 @@ public class Enterprise {
 
     public void setContactName(String contactName) {
         this.contactName = contactName;
+    }
+
+    public Collection<Project> getProjects() {
+        return this.projects;
     }
 
     public Long getId() {

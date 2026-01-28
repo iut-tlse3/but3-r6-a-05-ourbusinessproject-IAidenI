@@ -24,6 +24,10 @@ public class EnterpriseProjectService {
     public Project newProject(String title, String description, Enterprise enterprise) {
         Project project = new Project(title, description, enterprise);
 
+        if (enterprise != null) {
+            enterprise.getProjects().add(project);
+        }
+
         this.entityManager.persist(project);
         this.entityManager.flush();
 
