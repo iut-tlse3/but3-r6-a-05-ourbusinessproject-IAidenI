@@ -2,6 +2,7 @@ package ourbusinessproject;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -11,6 +12,7 @@ public class PartnershipService {
     @PersistenceContext
     private EntityManager entityManager;
 
+    @Transactional
     public Partnership newPartnership(Project project, Enterprise partnerEnterprise) {
         Partnership partnership = new Partnership(new Date(), project, partnerEnterprise);
 
@@ -23,6 +25,7 @@ public class PartnershipService {
         return this.entityManager.find(Partnership.class, id);
     }
 
+    @Transactional
     public void remove(Partnership partnership) {
         this.entityManager.remove(partnership);
         this.entityManager.flush();

@@ -7,6 +7,7 @@ import java.util.Date;
 @Service
 public class InitializationService {
     private final EnterpriseProjectService enterpriseProjectService;
+    private final PartnershipService partnershipService;
 
     private Project project1E1;
     private Project project1E2;
@@ -19,8 +20,9 @@ public class InitializationService {
     private Partnership partnershipP1E2WithE1;
     private Partnership partnershipP2E1WithE2;
 
-    InitializationService(EnterpriseProjectService enterpriseProjectService) {
+    InitializationService(EnterpriseProjectService enterpriseProjectService, PartnershipService partnershipService) {
         this.enterpriseProjectService = enterpriseProjectService;
+        this.partnershipService = partnershipService;
     }
 
     public void initProjects() {
@@ -31,18 +33,18 @@ public class InitializationService {
          * Comme l’initialisation s’exécute dans un contexte transactionnel,
          * l’échec d’une seule insertion provoque un rollback de la transaction entière.
          */
-        this.enterprise1 = enterpriseProjectService.newEnterprise("entreprise1", "description1", "contactName1", "Contact1@gmail.com");
-        this.enterprise2 = enterpriseProjectService.newEnterprise("entreprise2", "description2", "contactName2", "Contact2@gmail.com");
+        this.enterprise1 = this.enterpriseProjectService.newEnterprise("entreprise1", "description1", "contactName1", "Contact1@gmail.com");
+        this.enterprise2 = this.enterpriseProjectService.newEnterprise("entreprise2", "description2", "contactName2", "Contact2@gmail.com");
 
-        this.project1E1 = enterpriseProjectService.newProject("projet1E1", "description1E1", this.enterprise1);
-        this.project1E2 = enterpriseProjectService.newProject("projet1E2", "description1E2", this.enterprise2);
-        this.project2E1 = enterpriseProjectService.newProject("projet2E1", "description2E1", this.enterprise1);
+        this.project1E1 = this.enterpriseProjectService.newProject("projet1E1", "description1E1", this.enterprise1);
+        this.project1E2 = this.enterpriseProjectService.newProject("projet1E2", "description1E2", this.enterprise2);
+        this.project2E1 = this.enterpriseProjectService.newProject("projet2E1", "description2E1", this.enterprise1);
     }
 
     public void initPartnerships() {
-        this.partnershipP1E1WithE2 = new Partnership(new Date(), this.project1E1, this.enterprise2);
-        this.partnershipP1E2WithE1 = new Partnership(new Date(), this.project1E2, this.enterprise1);
-        this.partnershipP2E1WithE2 = new Partnership(new Date(), this.project2E1, this.enterprise2);
+        this.partnershipP1E1WithE2 = this.partnershipService.newPartnership(this.project1E1, this.enterprise2);
+        this.partnershipP1E2WithE1 = this.partnershipService.newPartnership(this.project1E2, this.enterprise1);
+        this.partnershipP2E1WithE2 = this.partnershipService.newPartnership(this.project2E1, this.enterprise2);
     }
 
     public Project getProject1E1() {
