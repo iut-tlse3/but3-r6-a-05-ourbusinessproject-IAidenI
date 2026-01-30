@@ -1,7 +1,6 @@
 package ourbusinessproject;
 
 import jakarta.annotation.PostConstruct;
-import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 @Service

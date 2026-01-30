@@ -1,6 +1,5 @@
 package ourbusinessproject;
 
-import jakarta.persistence.EntityManager;
 import org.springframework.stereotype.Service;
 
 @Service

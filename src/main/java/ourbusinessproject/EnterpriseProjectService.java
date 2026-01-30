@@ -1,7 +1,6 @@
 package ourbusinessproject;
 
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityResult;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
