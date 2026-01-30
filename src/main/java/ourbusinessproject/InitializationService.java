@@ -18,6 +18,13 @@ public class InitializationService {
     }
 
     public void initProjects() {
+        /*
+         * Les créations des objets sont faites dans la phase de bootstrap.
+         * Quand on a volontairement rendu le dernier projet invalide,
+         * une exception a été levée pendant initProjects().
+         * Comme l’initialisation s’exécute dans un contexte transactionnel,
+         * l’échec d’une seule insertion provoque un rollback de la transaction entière.
+         */
         this.enterprise1 = enterpriseProjectService.newEnterprise("entreprise1", "description1", "contactName1", "Contact1@gmail.com");
         this.enterprise2 = enterpriseProjectService.newEnterprise("entreprise2", "description2", "contactName2", "Contact2@gmail.com");
 
