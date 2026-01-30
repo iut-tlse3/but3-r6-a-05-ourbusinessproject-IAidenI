@@ -2,6 +2,8 @@ package ourbusinessproject;
 
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 @Service
 public class InitializationService {
     private final EnterpriseProjectService enterpriseProjectService;
@@ -12,6 +14,10 @@ public class InitializationService {
 
     private Enterprise enterprise1;
     private Enterprise enterprise2;
+
+    private Partnership partnershipP1E1WithE2;
+    private Partnership partnershipP1E2WithE1;
+    private Partnership partnershipP2E1WithE2;
 
     InitializationService(EnterpriseProjectService enterpriseProjectService) {
         this.enterpriseProjectService = enterpriseProjectService;
@@ -33,6 +39,12 @@ public class InitializationService {
         this.project2E1 = enterpriseProjectService.newProject("projet2E1", "description2E1", this.enterprise1);
     }
 
+    public void initPartnerships() {
+        this.partnershipP1E1WithE2 = new Partnership(new Date(), this.project1E1, this.enterprise2);
+        this.partnershipP1E2WithE1 = new Partnership(new Date(), this.project1E2, this.enterprise1);
+        this.partnershipP2E1WithE2 = new Partnership(new Date(), this.project2E1, this.enterprise2);
+    }
+
     public Project getProject1E1() {
         return this.project1E1;
     }
@@ -51,5 +63,17 @@ public class InitializationService {
 
     public Enterprise getEnterprise2() {
         return this.enterprise2;
+    }
+
+    public Partnership getPartnershipP1E1WithE2() {
+        return this.partnershipP1E1WithE2;
+    }
+
+    public Partnership getPartnershipP1E2WithE1() {
+        return this.partnershipP1E2WithE1;
+    }
+
+    public Partnership getPartnershipP2E1WithE2() {
+        return this.partnershipP2E1WithE2;
     }
 }
